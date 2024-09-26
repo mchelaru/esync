@@ -7,8 +7,9 @@ pub struct Semaphore {
 
 /// Basic semaphore implementation
 ///
-/// # Example
+/// # Examples
 ///
+/// Create a semaphore with initial value 1, that is taken and then released.
 /// ```
 /// # use esync::semaphore::Semaphore;
 /// let sem = Semaphore::new(1);
@@ -25,8 +26,8 @@ impl Semaphore {
         }
     }
 
-    /// Acquires the semaphore or waits indefinitely in order
-    /// to do so.
+    /// Acquires the semaphore or waits in order to do so until another consumer
+    /// releases the resource.
     pub fn wait(&self) {
         loop {
             let mut guard = self._mutex.lock().unwrap();
@@ -50,7 +51,7 @@ impl Semaphore {
     }
 
     /// Get the current value of the semaphore.
-    /// 
+    ///
     /// The semaphore starts with an initial value, that is decremented until
     /// zero every time a wait() call is completed. On the other hand, the
     /// semaphore value increments every time a release() call is completed.
