@@ -1,6 +1,6 @@
 use std::thread;
 
-use crate::semaphore::Semaphore;
+use crate::Semaphore;
 
 /// Process some iterable workload on a given number of threads
 ///

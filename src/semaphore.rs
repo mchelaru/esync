@@ -11,7 +11,7 @@ pub struct Semaphore {
 ///
 /// Create a semaphore with initial value 1, that is taken and then released.
 /// ```
-/// # use esync::semaphore::Semaphore;
+/// # use esync::Semaphore;
 /// let sem = Semaphore::new(1);
 /// sem.wait();
 /// assert_eq!(0, sem.get_current_value());
