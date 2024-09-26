@@ -19,7 +19,7 @@ pub struct Semaphore {
 /// ```
 impl Semaphore {
     /// Instanties a semaphore with a given initial value
-    pub fn new(initial_value: u32) -> Self {
+    pub const fn new(initial_value: u32) -> Self {
         Self {
             _mutex: Mutex::new(initial_value),
             _cv: Condvar::new(),
