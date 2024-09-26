@@ -5,14 +5,28 @@ pub struct Semaphore {
     _cv: Condvar,
 }
 
+/// Basic semaphore implementation
+///
+/// # Example
+///
+/// ```
+/// # use esync::semaphore::Semaphore;
+/// let sem = Semaphore::new(1);
+/// sem.wait();
+/// assert_eq!(0, sem.get_current_value());
+/// sem.release();
+/// ```
 impl Semaphore {
-    pub fn new(initial_count: u32) -> Self {
+    /// Instanties a semaphore with a given initial value
+    pub fn new(initial_value: u32) -> Self {
         Self {
-            _mutex: Mutex::new(initial_count),
+            _mutex: Mutex::new(initial_value),
             _cv: Condvar::new(),
         }
     }
 
+    /// Acquires the semaphore or waits indefinitely in order
+    /// to do so.
     pub fn wait(&self) {
         loop {
             let mut guard = self._mutex.lock().unwrap();
@@ -28,12 +42,18 @@ impl Semaphore {
         }
     }
 
+    /// Releases once the semaphore
     pub fn release(&self) {
         let mut guard = self._mutex.lock().unwrap();
         *guard += 1;
         self._cv.notify_all();
     }
 
+    /// Get the current value of the semaphore.
+    /// 
+    /// The semaphore starts with an initial value, that is decremented until
+    /// zero every time a wait() call is completed. On the other hand, the
+    /// semaphore value increments every time a release() call is completed.
     pub fn get_current_value(&self) -> u32 {
         *self._mutex.lock().unwrap()
     }
