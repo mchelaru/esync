@@ -2,6 +2,16 @@
 name = "esync"
 version = "0.1.0"
 edition = "2021"
+description = "This package contains some useful synchronization primitives"
+license = "MIT OR Apache-2.0"
+authors = ["mchelaru <mchelaru@gitlab.com>"]
+rust-version = "1.63"
+documentation = "https://github.com/mchelaru/esync/blob/main/README.md"
+readme = "README.md"
+homepage = "https://github.com/mchelaru/esync"
+repository = "https://github.com/mchelaru/esync"
+keywords = ["worker" , "thread", "semaphore"]
+categories = ["rust-patterns"]
 
 [dependencies]
 rand = "0.8.5"
